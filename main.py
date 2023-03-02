@@ -61,7 +61,7 @@ class Xtractor(ttkthemes.ThemedTk):
         notes = ''
         elements = ''
         qunatities = ''
-        excel_template = r'C:\Users\dan.ciucu\OneDrive - AECOM\Documents\Projects\Computer Science Projects\Field Notes Extractor\MACRO_Inspection Element Library_SNBI1.xlsx'
+        excel_template = r''
         # get the number of .txt files are in the folder
         file_numbers = len(os.listdir(globalvars.dirpath))
         # loop over the entire number of txt files available
