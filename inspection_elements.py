@@ -25,8 +25,8 @@ class properties():
                     # update last_digit and then stop
                     last_digit = i
                     break
-            # if the lenght of the string from first_digit to last_digit + 1 is greater than 1 and the first_digit is within the first 10 chars
-            if len(strings[first_digit:last_digit + 1]) > 1 and len(strings) > 35 and first_digit < 6 :
+            # if the lenght of the string from first_digit to last_digit + 1 is greater than 1 and the first_digit is within the first 10 chars and "/20" string is inside of strings
+            if len(strings[first_digit:last_digit + 1]) > 1 and len(strings) > 35 and first_digit < 6 and "/20" in strings :
                 # update the elements array
                 elements.append(strings[first_digit:last_digit + 1])
 
