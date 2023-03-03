@@ -26,7 +26,7 @@ class properties():
                     last_digit = i
                     break
             # if the lenght of the string from first_digit to last_digit + 1 is greater than 1 and the first_digit is within the first 10 chars and "/20" string is inside of strings
-            if len(strings[first_digit:last_digit + 1]) > 1 and len(strings) > 35 and first_digit < 6 and "/20" in strings :
+            if len(strings[first_digit:last_digit + 1]) > 1 and len(strings) > 35 and first_digit < 6 and "/20" in strings:
                 # update the elements array
                 elements.append(strings[first_digit:last_digit + 1])
 
@@ -116,9 +116,9 @@ class properties():
                 difference = 1
             else:
                 difference = int(strings_main[i + 1] - strings_main[i])
-            for j in range(1, difference):
+            for j in range(1, difference + 1):
                 temp += notes[int(strings_main[i] + j - 1)]
-                #print('temp = ', temp)
+
             description.append(temp.replace("\n", ''))
             temp = ''
 
