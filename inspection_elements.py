@@ -81,6 +81,9 @@ class properties():
             else:
                 # remember the key of that string
                 strings_description.append(count)
+
+        # add the last key where the last string is ending
+        strings_main.append(len(notes) + 1)
         
         # reset variables
         slashes = 0
@@ -116,7 +119,7 @@ class properties():
                 difference = 1
             else:
                 difference = int(strings_main[i + 1] - strings_main[i])
-            for j in range(1, difference + 1):
+            for j in range(1, difference):
                 temp += notes[int(strings_main[i] + j - 1)]
 
             description.append(temp.replace("\n", ''))
