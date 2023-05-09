@@ -120,9 +120,9 @@ class properties():
             else:
                 difference = int(strings_main[i + 1] - strings_main[i])
             for j in range(1, difference):
-                temp += notes[int(strings_main[i] + j - 1)]
+                temp += notes[int(strings_main[i] + j - 1)][2:].replace("\n", "")
 
-            description.append(temp.replace("\n", ''))
+            description.append(temp.replace("  ", " "))
             temp = ''
 
         return [total_qunatities, cs1_quantities, cs2_quantities, cs3_quantities, cs4_quantities, description]
