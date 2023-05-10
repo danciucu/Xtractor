@@ -97,7 +97,12 @@ class properties():
             total_qunatities.append(quantity[1])
             # check the lenght of the array of strings
             try:
-                cs1_quantities.append(quantity[len(quantity) - 4])
+                # iterate over all characters in the string
+                for i in range(len(quantity[len(quantity) - 4])):
+                    # if the character is a number or a dot or a comma, then keep it
+                    if quantity[len(quantity) - 4][i].isnumeric() or quantity[len(quantity) - 4][i] == '.' or quantity[len(quantity) - 4][i] == ',':
+                        cs1_quantities.append(quantity[len(quantity) - 4])
+    
             except:
                 cs1_quantities.append('?')
             try:
@@ -112,6 +117,7 @@ class properties():
                 cs4_quantities.append(quantity[len(quantity) - 1])
             except:
                 cs4_quantities.append('?')
+
 
         # loop over all stings are not comments
         for i in range(len(strings_main)):
