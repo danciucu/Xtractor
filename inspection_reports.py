@@ -21,7 +21,7 @@ class notes():
             # update variable
             lineofinterest += 1
             # if the line contains what the user is looking for
-            if 'ELEM   ELEMENT NAME' in lines[lineofinterest]:
+            if ('ELEM   ELEMENT NAME' in lines[lineofinterest]) or ('814 AC Wearing' in lines[lineofinterest + 1]) or ('515 Steel' in lines[lineofinterest + 1]):
                 # loop over the lines below the line that contains the wanted string
                 while i < len(lines) - lineofinterest:
                     # update variable
@@ -40,9 +40,14 @@ class notes():
                     if 'Inspection' in lines[lineofinterest + i]:
                         i += 7
                         continue
+                    # if the previous line contains the child element, skip the current line because it has only one word (i.e. Surface or Protective)
+                    if (('Surface' in lines[lineofinterest + i]) and ('814 AC Wearing' in lines[lineofinterest + i - 1])) or (('Protective' in lines[lineofinterest + i]) and ('515 Steel' in lines[lineofinterest + i - 1])):
+                        continue
                     # if the line is not empty add it to the elements array
                     if len(lines[lineofinterest + i]) > 2:
                         elements.append(lines[lineofinterest + i])
+            #if '813 AC Wearing' or '515 Steel' in lines[lineofinterest]:
+
             # if the line contains 'Work Candidates Report' then stop the process
             if 'Work Candidates Report' in lines[lineofinterest]:
                 # close txt file
