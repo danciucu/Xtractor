@@ -43,6 +43,19 @@ class Xtractor(ttkthemes.ThemedTk):
         self.dirpath_entry.insert(tkinter.END, folder_path)
         # set the path for the txt files
         globalvars.dirpath = folder_path
+        # update user_var
+        count = 0
+        i = 0
+        j = 0
+        for k in range(len(folder_path)):
+            if folder_path[k] == "/":
+                count += 1
+            elif count == 2 and i == 0:
+                i = k
+            elif count == 3:
+                j = k - 1
+                break
+        globalvars.user_path = folder_path[i:j]
 
 
     def save_path(self):
@@ -50,6 +63,7 @@ class Xtractor(ttkthemes.ThemedTk):
         folder_path = tkinter.filedialog.askdirectory()
         # fill entry bar with the path
         self.savepath_entry.insert(tkinter.END, folder_path)
+        
         # set the path for saving files
         globalvars.savepath = folder_path
 
@@ -61,7 +75,8 @@ class Xtractor(ttkthemes.ThemedTk):
         notes = ''
         elements = ''
         qunatities = ''
-        excel_template = r''
+        excel_path = 'C:/Users/' + globalvars.user_path + '/AECOM/KYTC NBIS Inspections - 2022-2024/400_Technical/200_Templates/MACRO_Inspection Element Library_SNBI.xlsm'
+        excel_template = r'%s' % excel_path
         # get the number of .txt files are in the folder
         file_numbers = len(os.listdir(globalvars.dirpath))
         # loop over the entire number of txt files available
