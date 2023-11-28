@@ -1,3 +1,5 @@
+import re
+
 class properties():
     def __init__(self) -> None:
         pass
@@ -50,7 +52,7 @@ class properties():
             digits = 0
             first_digit = 0
             last_digit = 0
-        print(elements_str)
+        #print(elements_str)
         return [elements_str, elements_int]
 
     # function that extracts the element quantities and the description
@@ -106,33 +108,47 @@ class properties():
         last_slash = 0
 
         count = 0
-
+        #print(quantities)
         # loop over splitted values of the quantities
         for quantity in quantities:
             # update total quantities
-            total_qunatities.append(quantity[1])
-            # check the lenght of the array of strings
             try:
-                # iterate over all characters in the string
-                for i in range(len(quantity[len(quantity) - 4])):
-                    # if the character is a number or a dot or a comma, then keep it
-                    if quantity[len(quantity) - 4][i].isnumeric() or quantity[len(quantity) - 4][i] == '.' or quantity[len(quantity) - 4][i] == ',':
-                        cs1_quantities.append(quantity[len(quantity) - 4])
+                total_qunatities.append(int(re.sub('[^0-9,]', "", quantity[1]).replace(",", "")))
+            except:
+                total_qunatities.append('?')
+
+            try:
+                cs1_quantities.append(int(re.sub('[^0-9,]', "", quantity[len(quantity) - 4]).replace(",", "")))
     
             except:
                 cs1_quantities.append('?')
+
             try:
-                cs2_quantities.append(quantity[len(quantity) - 3])
+                cs2_quantities.append(int(re.sub('[^0-9,]', "", quantity[len(quantity) - 3]).replace(",", "")))
             except:
                 cs2_quantities.append('?')
+
             try:
-                cs3_quantities.append(quantity[len(quantity) - 2])
+                cs3_quantities.append(int(re.sub('[^0-9,]', "", quantity[len(quantity) - 2]).replace(",", "")))
             except:
                 cs4_quantities.append('?')
+
             try:
-                cs4_quantities.append(quantity[len(quantity) - 1])
+                cs4_quantities.append(int(re.sub('[^0-9,]', "", quantity[len(quantity) - 1]).replace(",", "")))
             except:
                 cs4_quantities.append('?')
+
+        for i in range(len(total_qunatities)):
+            if total_qunatities[i] == '?':
+                try:
+                    total_qunatities[i] = cs1_quantities[i] + cs2_quantities[i] + cs3_quantities[i] + cs4_quantities[i]
+                except:
+                    continue
+            elif cs1_quantities[i] == '?':
+                try:
+                    cs1_quantities[i] = total_qunatities[i] - cs2_quantities[i] + cs3_quantities[i] + cs4_quantities[i]
+                except:
+                    continue
 
 
         # loop over all stings are not comments
