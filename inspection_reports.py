@@ -5,6 +5,8 @@ class notes():
     def comments(filepath):
         # create an empty array
         elements = []
+        # child elements
+        child_elements = ['811 Latex Wearing', '812 PCC Wearing', '813 AC Wearing', '814 AC Wearing', '815 Epoxy Wearing', '816 Timber Wearing', '515 Steel']
         # open the txt file
         file = open(filepath, 'r')
         # read the lines of the file
@@ -21,7 +23,7 @@ class notes():
             # update variable
             lineofinterest += 1
             # if the line contains what the user is looking for
-            if ('ELEM   ELEMENT NAME' in lines[lineofinterest]) or ('814 AC Wearing' in lines[lineofinterest + 1]) or ('515 Steel' in lines[lineofinterest + 1]):
+            if ('ELEM   ELEMENT NAME' in lines[lineofinterest]) or ('811 Latex Wearing' in lines[lineofinterest + 1]) or ('812 PCC Wearing' in lines[lineofinterest + 1]) or ('813 AC Wearing' in lines[lineofinterest + 1]) or ('814 AC Wearing' in lines[lineofinterest + 1]) or ('815 Epoxy Wearing' in lines[lineofinterest + 1]) or ('816 Timber Wearing' in lines[lineofinterest + 1]) or ('515 Steel' in lines[lineofinterest + 1]):
                 # loop over the lines below the line that contains the wanted string
                 while i < len(lines) - lineofinterest:
                     # update variable
@@ -41,7 +43,7 @@ class notes():
                         i += 7
                         continue
                     # if the previous line contains the child element, skip the current line because it has only one word (i.e. Surface or Protective)
-                    if (('Surface' in lines[lineofinterest + i]) and ('814 AC Wearing' in lines[lineofinterest + i - 1])) or (('Protective' in lines[lineofinterest + i]) and ('515 Steel' in lines[lineofinterest + i - 1])):
+                    if (('Surface' in lines[lineofinterest + i]) and  ('814 AC Wearing' in lines[lineofinterest + i - 1]) or ('811 Latex Wearing' in lines[lineofinterest + i - 1]) or ('812 PCC Wearing' in lines[lineofinterest + i - 1]) or ('813 AC Wearing' in lines[lineofinterest + i - 1]) or ('814 AC Wearing' in lines[lineofinterest + i - 1]) or ('815 Epoxy Wearing' in lines[lineofinterest + i - 1]) or ('816 Timber Wearing' in lines[lineofinterest + i - 1])) or (('Protective' in lines[lineofinterest + i]) and ('515 Steel' in lines[lineofinterest + i - 1])):
                         continue
                     # if the line is not empty add it to the elements array
                     if len(lines[lineofinterest + i]) > 2:

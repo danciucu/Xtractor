@@ -8,14 +8,22 @@ class properties():
         digits = 0
         first_digit = 0
         last_digit = 0
-        # create empty array
-        elements = []
+        element_name = ''
+        # create empty arrays
+        elements_str = []
+        elements_int = []
+        # create empty dictionary
+        child_dict = {}
+        # repeted child elements
+        repeated_child = 1
     
         # loop over all the sentences/strings in the notes
         for strings in notes:
             # loop over the charactes of each string
+            #print(strings)
             for i in range(len(strings)):
                 # if the character is a digit and the number of digits is null
+                #print(f'{strings[i]} \n')
                 if strings[i].isdigit() == True and digits == 0:
                     # update first_digit and the digits count
                     first_digit = i
@@ -25,17 +33,25 @@ class properties():
                     # update last_digit and then stop
                     last_digit = i
                     break
-            # if the lenght of the string from first_digit to last_digit + 1 is greater than 1 and the first_digit is within the first 10 chars and "/20" string is inside of strings
-            if len(strings[first_digit:last_digit + 1]) > 1 and len(strings) > 35 and first_digit < 6 and "/20" in strings:
+            # if the lenght of the string from first_digit to last_digit + 1 is greater than 1 and the first_digit is within the first 6 chars and "/20" string is inside of strings
+            if len(strings[first_digit:last_digit + 1]) > 1 and len(strings) > 35 and first_digit < 9 and "/202" in strings:
+                # check if the element is repeated
+                if int(strings[first_digit:last_digit + 1]) in child_dict:
+                    element_name = strings[first_digit:last_digit + 1] + '(' + str(repeated_child) + ')'
+                    repeated_child += 1
+                else:
+                    child_dict[int(strings[first_digit:last_digit + 1])] = 'True'
+                    element_name = strings[first_digit:last_digit + 1]
                 # update the elements array
-                elements.append(strings[first_digit:last_digit + 1])
+                elements_str.append(element_name)
+                elements_int.append(int(strings[first_digit:last_digit + 1]))
 
             # reset varables
             digits = 0
             first_digit = 0
             last_digit = 0
-
-        return elements
+        print(elements_str)
+        return [elements_str, elements_int]
 
     # function that extracts the element quantities and the description
     def element_quantities(notes):

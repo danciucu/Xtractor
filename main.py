@@ -73,7 +73,8 @@ class Xtractor(ttkthemes.ThemedTk):
         filename = ''
         filepath = ''
         notes = ''
-        elements = ''
+        elements_str = []
+        elements_int = []
         qunatities = ''
         excel_path = 'C:/Users/' + globalvars.user_path + '/AECOM/KYTC NBIS Inspections - 2022-2024/400_Technical/200_Templates/MACRO_Inspection Element Library_SNBI.xlsm'
         excel_template = r'%s' % excel_path
@@ -87,12 +88,14 @@ class Xtractor(ttkthemes.ThemedTk):
             filename = file_import.txtfile.get_filename(globalvars.dirpath, i)
             # get inspection notes
             notes = inspection_reports.notes.comments(filepath)
-            # get elements' number
+            # get elements' number for tabs
             elements = inspection_elements.properties.element_number(notes)
+            elements_str = elements[0]
+            elements_int = elements[1]
             # get quantities
             qunatities = inspection_elements.properties.element_quantities(notes)
             # create a new excel spreadsheet
-            newexcel.field_notes.create(excel_template, globalvars.savepath, filename, elements, qunatities)
+            newexcel.field_notes.create(excel_template, globalvars.savepath, filename, elements_str, elements_int, qunatities)
 
             
 if __name__ == "__main__":
