@@ -101,8 +101,8 @@ class populate():
             # populate the location dictionary
             location[keyword] = cells[i]
         # Print the organized data
-        for key, value in data.items():
-            print(f"{key}: {value}")
+        #for key, value in data.items():
+        #    print(f"{key}: {value}")
         #print(location)
 
         return [keywords, data, location]

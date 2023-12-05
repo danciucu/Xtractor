@@ -108,34 +108,34 @@ class properties():
         last_slash = 0
 
         count = 0
-        #print(quantities)
+        # print(quantities)
         # loop over splitted values of the quantities
         for quantity in quantities:
+            #print(quantities)
             # update total quantities
             try:
-                total_qunatities.append(int(re.sub('[^0-9,]', "", quantity[1]).replace(",", "")))
-            except:
+                total_qunatities.append(int(float(quantity[1])))
+            except ValueError:
                 total_qunatities.append('?')
 
             try:
-                cs1_quantities.append(int(re.sub('[^0-9,]', "", quantity[len(quantity) - 4]).replace(",", "")))
-    
-            except:
+                cs1_quantities.append(int(float(quantity[len(quantity) - 4])))
+            except ValueError:
                 cs1_quantities.append('?')
 
             try:
-                cs2_quantities.append(int(re.sub('[^0-9,]', "", quantity[len(quantity) - 3]).replace(",", "")))
-            except:
+                cs2_quantities.append(int(float(quantity[len(quantity) - 3])))
+            except ValueError:
                 cs2_quantities.append('?')
 
             try:
-                cs3_quantities.append(int(re.sub('[^0-9,]', "", quantity[len(quantity) - 2]).replace(",", "")))
-            except:
-                cs4_quantities.append('?')
+                cs3_quantities.append(int(float(quantity[len(quantity) - 2])))
+            except ValueError:
+                cs3_quantities.append('?')
 
             try:
-                cs4_quantities.append(int(re.sub('[^0-9,]', "", quantity[len(quantity) - 1]).replace(",", "")))
-            except:
+                cs4_quantities.append(int(float(quantity[len(quantity) - 1])))
+            except ValueError:
                 cs4_quantities.append('?')
 
         for i in range(len(total_qunatities)):

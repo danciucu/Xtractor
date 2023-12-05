@@ -75,7 +75,7 @@ class Xtractor(ttkthemes.ThemedTk):
         notes = ''
         elements_str = []
         elements_int = []
-        qunatities = ''
+        quantities = ''
         excel_path = 'C:/Users/' + globalvars.user_path + '/AECOM/KYTC NBIS Inspections - 2022-2024/400_Technical/200_Templates/MACRO_Inspection Element Library_SNBI.xlsm'
         excel_template = r'%s' % excel_path
         # get the number of .txt files are in the folder
@@ -101,9 +101,9 @@ class Xtractor(ttkthemes.ThemedTk):
             elements_str = elements[0]
             elements_int = elements[1]
             # get quantities
-            qunatities = inspection_elements.properties.element_quantities(notes)
+            quantities = inspection_elements.properties.element_quantities(notes)
             # create a new excel spreadsheet
-            newexcel.field_notes.create(excel_template, globalvars.savepath, filename, main_keywords, main_dictionary, main_location, elements_str, elements_int, qunatities)
+            newexcel.field_notes.create(excel_template, globalvars.savepath, filename, main_keywords, main_dictionary, main_location, elements_str, elements_int, quantities)
 
             
 if __name__ == "__main__":
