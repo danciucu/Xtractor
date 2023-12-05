@@ -12,7 +12,11 @@ class field_notes():
         wb = openpyxl.load_workbook(excel_template)
         sheet = wb['Info, NBI, Work']
         for i in range(len(main_keywords)):
-            if main_dictionary[main_keywords[i]] == 'None':
+            if main_dictionary[main_keywords[i]] == 'None' or main_keywords[i] == 'Kind of Hwy (5B':
+                continue
+            if main_keywords[i] == 'Route Num (5D):':
+                #print(main_dictionary[main_keywords[i + 1]] + str(int(main_dictionary[main_keywords[i]])))
+                cell_obj_main = sheet.cell(row = main_location[main_keywords[i]][0], column = main_location[main_keywords[i]][1], value = main_dictionary[main_keywords[i + 1]] + str(int(main_dictionary[main_keywords[i]])))
                 continue
             cell_obj_main = sheet.cell(row = main_location[main_keywords[i]][0], column = main_location[main_keywords[i]][1], value = main_dictionary[main_keywords[i]])
         sheet_to_copy = wb['# - Element Temp']

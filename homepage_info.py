@@ -26,11 +26,17 @@ class populate():
         keywords = [
             'Structure Num', 
             'Routine', 
-            'Location', 
+            'Route Num (5D):',
+            'Kind of Hwy (5B',
             'Posting Status', 
             'SUPERSTRUCTURE CONDITION', 
             'CULVERT CONDITION', 
-            'Main Design'
+            'Main Design',
+            'Deck Rating',
+            'Superstructure Rating',
+            'Substructure Rating',
+            'Culvert Rating',
+            'Scour Observed'
             # Add more keywords here as needed
             ]
         
@@ -38,14 +44,23 @@ class populate():
         cells = [
             # row, column
             [1,    2],
-            [4,    3],
+            [5,    3],
+            [7,    2],
             [7,    2],
             [9,    5],
             [14,    2],
             [14,    2],
-            [16,    2]
+            [16,    2],
+            [25,    2],
+            [28,    2],
+            [31,    2],
+            [34,    2],
+            [20,    5]
             # Add more cells here as needed
             ]
+        
+        # Route Signing Prefix
+        route = {'1': 'I', '2': 'US', '3': 'KY', '4': 'CR', '5': 'CS'}
 
         # Create a dictionary to store the extracted values
         data = {}
@@ -55,25 +70,39 @@ class populate():
             # get the value 
             value = extract_value(keyword)
             
+            # filter the information
             if keyword == 'SUPERSTRUCTURE CONDITION' and not value:
-                value = ['Bridge']
+                if value == []:
+                    value = ['Bridge']
             elif keyword == 'CULVERT CONDITION' and not value:
-                 value == ['Culvert']
+                 if value == []:
+                    value = ['Culvert']
             elif keyword == 'Posting Status':
                 if value[2] == 'Posted':
                     value = ['Yes']
                 else:
-                    alue = ['No']
+                    value = ['No']
+            elif keyword == 'Deck Rating' or keyword == 'Substructure Rating' or keyword == 'Culvert Rating':
+                if value is not None:
+                    value = [value[1]]
+            elif keyword == 'Scour Observed' and 'No' in value:
+                value = ['No Scour']
+                #value = 'No Scour'
+
             # populate the data dictionary
             try:
-                data[keyword] = value[0]
-            except:
+                if keyword == 'Kind of Hwy (5B':
+                    data[keyword] = route[value[0]]
+                else:
+                    data[keyword] = value[0]
+            except (IndexError, KeyError, TypeError):
                 data[keyword] = value
+
             # populate the location dictionary
             location[keyword] = cells[i]
         # Print the organized data
-        #for key, value in data.items():
-        #    print(f"{key}: {value}")
+        for key, value in data.items():
+            print(f"{key}: {value}")
         #print(location)
 
         return [keywords, data, location]
