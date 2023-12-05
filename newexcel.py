@@ -5,12 +5,16 @@ class field_notes():
     def __init__(self) -> None:
         pass
 
-    def create(excel_template, savepath, filename, elements_str, elements_int, quantities):
+    def create(excel_template, savepath, filename, main_keywords, main_dictionary, main_location, elements_str, elements_int, quantities):
         # total number of elements per txt file
         no_elements = len(elements_int)
         # create a new excel file
         wb = openpyxl.load_workbook(excel_template)
         sheet = wb['Info, NBI, Work']
+        for i in range(len(main_keywords)):
+            if main_dictionary[main_keywords[i]] == 'None':
+                continue
+            cell_obj_main = sheet.cell(row = main_location[main_keywords[i]][0], column = main_location[main_keywords[i]][1], value = main_dictionary[main_keywords[i]])
         sheet_to_copy = wb['# - Element Temp']
         # loop over all the elements extracted
         for i in range(no_elements):

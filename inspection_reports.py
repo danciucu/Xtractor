@@ -6,7 +6,7 @@ class notes():
         # create an empty array
         elements = []
         # child elements
-        child_elements = ['811 Latex Wearing', '812 PCC Wearing', '813 AC Wearing', '814 AC Wearing', '815 Epoxy Wearing', '816 Timber Wearing', '515 Steel']
+        child_elements = ['811 Latex Wearing Surface', '812 PCC Wearing Surface', '813 AC Wearing Surf w/ Membrane', '814 AC Wearing Surface', '815 Epoxy Wearing Surface', '816 Timber Wearing Surface', '515 Steel Protective Coating']
         # open the txt file
         file = open(filepath, 'r')
         # read the lines of the file

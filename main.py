@@ -1,14 +1,14 @@
 import os
 import tkinter, ttkthemes, tkinter.filedialog
 
-import globalvars, file_import, inspection_reports, inspection_elements, newexcel
+import globalvars, file_import, inspection_reports, inspection_elements, newexcel, homepage_info
 
 class Xtractor(ttkthemes.ThemedTk):
     def __init__(self):
         super().__init__()
 
         # configure the root window
-        self.title('XtractoR')
+        self.title('Xtractor')
         self.geometry('300x300')
         self.set_theme('radiance')
         # define a frame
@@ -88,6 +88,14 @@ class Xtractor(ttkthemes.ThemedTk):
             filename = file_import.txtfile.get_filename(globalvars.dirpath, i)
             # get inspection notes
             notes = inspection_reports.notes.comments(filepath)
+            # homepage info
+            main_info = homepage_info.populate.info(filepath)
+            # get the keywords
+            main_keywords = main_info[0]
+            # get the dictionary
+            main_dictionary = main_info[1]
+            # get the location
+            main_location = main_info[2]
             # get elements' number for tabs
             elements = inspection_elements.properties.element_number(notes)
             elements_str = elements[0]
@@ -95,7 +103,7 @@ class Xtractor(ttkthemes.ThemedTk):
             # get quantities
             qunatities = inspection_elements.properties.element_quantities(notes)
             # create a new excel spreadsheet
-            newexcel.field_notes.create(excel_template, globalvars.savepath, filename, elements_str, elements_int, qunatities)
+            newexcel.field_notes.create(excel_template, globalvars.savepath, filename, main_keywords, main_dictionary, main_location, elements_str, elements_int, qunatities)
 
             
 if __name__ == "__main__":
