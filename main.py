@@ -1,4 +1,5 @@
 import os
+import datetime
 import tkinter, ttkthemes, tkinter.filedialog
 
 import globalvars, file_import, inspection_reports, inspection_elements, newexcel, homepage_info
@@ -14,27 +15,35 @@ class Xtractor(ttkthemes.ThemedTk):
         # define a frame
         self.main_frame = tkinter.ttk.Frame(self)
         self.main_frame.pack()
+        ## label for today's day
+        self.date_label = tkinter.ttk.Label(self.main_frame, text = 'Inspection Date')
+        self.date_label.grid(row = 0, column = 1)
+        ## entry for today's day
+        self.date_entry = tkinter.ttk.Entry(self.main_frame, width = 30, state = tkinter.NORMAL, justify = 'center')
+        self.date_entry.grid(row = 1, column = 1)
+        # add today's date as a suggestion
+        self.date_entry.insert(tkinter.END, datetime.date.today())
         ## label for directory path
         self.dirpath_label = tkinter.ttk.Label(self.main_frame, text = 'Directory Path')
-        self.dirpath_label.grid(row = 0, column = 1)
+        self.dirpath_label.grid(row = 2, column = 1)
         ## entry for directory path
         self.dirpath_entry = tkinter.ttk.Entry(self.main_frame, width = 30, state = tkinter.NORMAL)
-        self.dirpath_entry.grid(row = 1, column = 1)
+        self.dirpath_entry.grid(row = 3, column = 1)
         ## button for directory path
         self.dirpath_button = tkinter.ttk.Button(self.main_frame, text = '...', state = tkinter.NORMAL, command = self.txt_import, width = 2)
-        self.dirpath_button.grid(row = 1, column = 2)
+        self.dirpath_button.grid(row = 3, column = 2)
         ## label for save path
         self.savepath_label = tkinter.ttk.Label(self.main_frame, text = 'Save Path')
-        self.savepath_label.grid(row = 2, column = 1)
+        self.savepath_label.grid(row = 4, column = 1)
         ## entry for save path
         self.savepath_entry = tkinter.ttk.Entry(self.main_frame, width = 30, state = tkinter.NORMAL)
-        self.savepath_entry.grid(row = 3, column = 1)
+        self.savepath_entry.grid(row = 5, column = 1)
         ## button for save path
         self.savepath_button = tkinter.ttk.Button(self.main_frame, text = '...', state = tkinter.NORMAL, command = self.save_path, width = 2)
-        self.savepath_button.grid(row = 3, column = 2) 
+        self.savepath_button.grid(row = 5, column = 2) 
         ## button for starting the process
         self.start_button = tkinter.ttk.Button(self.main_frame, text = 'Start', command = self.generate_excel, width = 4)
-        self.start_button.grid(row =4, column = 1)
+        self.start_button.grid(row =6, column = 1)
 
     def txt_import(self):
         # variable that handles the Excel path
@@ -78,6 +87,9 @@ class Xtractor(ttkthemes.ThemedTk):
         quantities = ''
         excel_path = 'C:/Users/' + globalvars.user_path + '/AECOM/KYTC NBIS Inspections - 2022-2024/400_Technical/200_Templates/MACRO_Inspection Element Library_SNBI.xlsm'
         excel_template = r'%s' % excel_path
+        # get the date inputed by user
+        globalvars.inspection_date = self.date_entry.get()
+        print(globalvars.inspection_date)
         # get the number of .txt files are in the folder
         file_numbers = len(os.listdir(globalvars.dirpath))
         # loop over the entire number of txt files available

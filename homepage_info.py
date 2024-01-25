@@ -13,13 +13,8 @@ class populate():
             for i, line in enumerate(lines):
                 if keyword in line:
 
-                    if keyword == 'Main Design':
-                        value = lines[i + 1].split()
-
-                    else:
-                        index = line.index(keyword) + len(keyword)
-                        value = line[index:].split()
-
+                    index = line.index(keyword) + len(keyword)
+                    value = line[index:].split()
                     return value
 
         # Define a list of keywords you want to search for
@@ -28,39 +23,39 @@ class populate():
             'Routine', 
             'Route Num (5D):',
             'Kind of Hwy (5B',
+            'ROUTE ON STRUCTURE:',
             'Posting Status', 
             'SUPERSTRUCTURE CONDITION', 
             'CULVERT CONDITION', 
-            'Main Design',
             'Deck Rating',
             'Superstructure Rating',
             'Substructure Rating',
             'Culvert Rating',
-            'Scour Observed'
+            'Scour Observed',
             # Add more keywords here as needed
             ]
         
         # Define a list of cells you want to populate
         cells = [
             # row, column
-            [1,    2],
-            [5,    3],
-            [7,    2],
-            [7,    2],
-            [9,    5],
-            [14,    2],
-            [14,    2],
-            [16,    2],
-            [25,    2],
-            [28,    2],
-            [31,    2],
-            [34,    2],
-            [20,    5]
+            [1,    2], # Structure Num
+            [5,    3], # Routine
+            [7,    2], # Route Num (5D):
+            [7,    2], # Kind of Hwy (5B
+            [7,    3], # ROUTE ON STRUCTURE
+            [9,    5], # Posting Status
+            [14,   2], # SUPERSTRUCTURE CONDITION
+            [14,   2], # CULVERT CONDITION
+            [25,   2], # Deck Rating
+            [28,   2], # Superstructure Rating
+            [31,   2], # Substructure Rating
+            [34,   2], # Culvert Rating
+            [20,   5], # Scour Observed
             # Add more cells here as needed
             ]
         
         # Route Signing Prefix
-        route = {'1': 'I', '2': 'US', '3': 'KY', '4': 'CR', '5': 'CS'}
+        route = {'1': 'I-', '2': 'US-', '3': 'KY-', '4': 'CR-', '5': 'CS-'}
 
         # Create a dictionary to store the extracted values
         data = {}
@@ -87,12 +82,22 @@ class populate():
                     value = [value[1]]
             elif keyword == 'Scour Observed' and 'No' in value:
                 value = ['No Scour']
-                #value = 'No Scour'
+            elif keyword == 'ROUTE ON STRUCTURE:':
+                j = 0
+                name = ''
+                while value[j] != 'CLASSIFICATION':
+                    if len(value[j]) < 2:
+                        j += 1
+                    name += value[j] + ' '
+                    j += 1
+                value = name
 
             # populate the data dictionary
             try:
                 if keyword == 'Kind of Hwy (5B':
                     data[keyword] = route[value[0]]
+                elif keyword == 'ROUTE ON STRUCTURE:':
+                    data[keyword] = value
                 else:
                     data[keyword] = value[0]
             except (IndexError, KeyError, TypeError):

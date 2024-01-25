@@ -1,6 +1,9 @@
 import os
 import openpyxl
 
+import globalvars
+
+
 class field_notes():
     def __init__(self) -> None:
         pass
@@ -43,5 +46,5 @@ class field_notes():
             cell_obh5 = new_sheet.cell(row = 4, column = 9, value = quantities[4][i])
             cell_obh6 = new_sheet.cell(row = 17, column = 1, value = quantities[5][i])
         # save the file
-        wb.save(os.path.join(savepath, filename + ' Field Notes 2023MM.xlsx'))
+        wb.save(os.path.join(savepath, filename + ' Field Notes '+ globalvars.inspection_date[0:4] + globalvars.inspection_date[5:7] +'DD.xlsx'))
         wb.close()     
