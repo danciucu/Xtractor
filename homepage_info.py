@@ -1,9 +1,10 @@
+import re
+
 class populate():
     def __init__(self) -> None:
         pass
 
     def info(filepath):
-
         # Open the file and read the lines
         with open(filepath, 'r') as file:
             lines = file.readlines()
@@ -111,3 +112,38 @@ class populate():
         #print(location)
 
         return [keywords, data, location]
+    
+
+
+    def work_items(filepath):
+        initial_corpus = []
+        final_corpus = []
+        current_lines = []
+        # Read the content of the file
+        file = open(filepath, 'r')
+        # read the lines of the file
+        lines = file.readlines()
+
+        for i, line in enumerate(lines):
+            if 'Work Candidates Report' in line:
+                initial_corpus = lines[i:]
+
+
+        for line in initial_corpus:
+            line_lower = line.lower().strip()
+
+        # Check for the presence of specific keywords
+            if 'work candidates report' in line_lower or 'work history' in line_lower:
+                continue
+            elif any(keyword in line_lower for keyword in ["notes :", "concur", '.']):
+                current_lines.append(line.strip())
+            elif current_lines:
+                final_corpus.append(re.sub('Notes : ', '',(' '.join(current_lines))))
+                current_lines = []
+
+        # If there's any remaining content in current_lines, add it to array2
+        if current_lines:
+            final_corpus.append(re.sub('Notes : ', '',(' '.join(current_lines))))
+
+
+        return final_corpus

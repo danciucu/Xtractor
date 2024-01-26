@@ -85,7 +85,7 @@ class Xtractor(ttkthemes.ThemedTk):
         elements_str = []
         elements_int = []
         quantities = ''
-        excel_path = 'C:/Users/' + globalvars.user_path + '/AECOM/KYTC NBIS Inspections - 2022-2024/400_Technical/200_Templates/MACRO_Inspection Element Library_SNBI.xlsm'
+        excel_path = 'C:/Users/' + globalvars.user_path + '/AECOM/KYTC NBIS Inspections - 2024-01/400_Technical/200_Templates/MACRO_Inspection Element Library_SNBI.xlsm'
         excel_template = r'%s' % excel_path
         # get the date inputed by user
         globalvars.inspection_date = self.date_entry.get()
@@ -102,6 +102,7 @@ class Xtractor(ttkthemes.ThemedTk):
             notes = inspection_reports.notes.comments(filepath)
             # homepage info
             main_info = homepage_info.populate.info(filepath)
+            work_items = homepage_info.populate.work_items(filepath)
             # get the keywords
             main_keywords = main_info[0]
             # get the dictionary
@@ -115,7 +116,7 @@ class Xtractor(ttkthemes.ThemedTk):
             # get quantities
             quantities = inspection_elements.properties.element_quantities(notes)
             # create a new excel spreadsheet
-            newexcel.field_notes.create(excel_template, globalvars.savepath, filename, main_keywords, main_dictionary, main_location, elements_str, elements_int, quantities)
+            newexcel.field_notes.create(excel_template, globalvars.savepath, filename, main_keywords, main_dictionary, main_location, work_items, elements_str, elements_int, quantities)
 
             
 if __name__ == "__main__":
