@@ -7,10 +7,16 @@ class notes():
         elements = []
         # child elements
         child_elements = ['811 Latex Wearing Surface', '812 PCC Wearing Surface', '813 AC Wearing Surf w/ Membrane', '814 AC Wearing Surface', '815 Epoxy Wearing Surface', '816 Timber Wearing Surface', '515 Steel Protective Coating']
+        
+        encodings_to_try = ['utf-8', 'latin-1', 'ISO-8859-1', 'cp1252']
         # open the txt file
-        file = open(filepath, 'r')
-        # read the lines of the file
-        lines = file.readlines()
+        for encoding in encodings_to_try:
+            try:
+                with open(filepath, 'r', encoding=encoding, errors='replace') as file:
+                    lines = file.readlines()
+                break
+            except:
+                print(f"Failed to decode using {encoding}")
         # create a variable that loops over the lines
         lineofinterest = 0
         # create a variable to monitor the empty lines
@@ -55,3 +61,4 @@ class notes():
                 # close txt file
                 file.close()
                 return elements
+            

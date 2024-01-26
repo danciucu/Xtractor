@@ -9,6 +9,7 @@ class field_notes():
         pass
 
     def create(excel_template, savepath, filename, main_keywords, main_dictionary, main_location, work_items, elements_str, elements_int, quantities):
+        #print(filename)
         # total number of elements per txt file
         no_elements = len(elements_int)
         # create a new excel file

@@ -26,7 +26,7 @@ class properties():
             for i in range(len(strings)):
                 # if the character is a digit and the number of digits is null
                 #print(f'{strings[i]} \n')
-                if strings[i].isdigit() == True and digits == 0:
+                if strings[i].isdigit() == True and digits == 0 and int(strings[i]) != 0:
                     # update first_digit and the digits count
                     first_digit = i
                     digits += 1
@@ -53,6 +53,7 @@ class properties():
             first_digit = 0
             last_digit = 0
         #print(elements_str)
+        #print(elements_int)
         return [elements_str, elements_int]
 
     # function that extracts the element quantities and the description
@@ -108,8 +109,8 @@ class properties():
         last_slash = 0
 
         count = 0
-        print(quantities)
-        print('\n')
+        #print(quantities)
+        #print('\n')
         # loop over splitted values of the quantities
         for quantity in quantities:
             #print(quantities)
@@ -139,15 +140,15 @@ class properties():
             except ValueError:
                 cs4_quantities.append('?')
         
-        print(total_qunatities)
-        print('\n')
-        print(cs1_quantities)
-        print('\n')
-        print(cs2_quantities)
-        print('\n')
-        print(cs3_quantities)
-        print('\n')
-        print(cs4_quantities)
+        #print(total_qunatities)
+        #print('\n')
+        #print(cs1_quantities)
+        #print('\n')
+        #print(cs2_quantities)
+        #print('\n')
+        #print(cs3_quantities)
+        #print('\n')
+        #print(cs4_quantities)
 
         for i in range(len(total_qunatities)):
             if total_qunatities[i] == '?':
