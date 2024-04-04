@@ -1,7 +1,10 @@
 def init():
-    global dirpath, savepath
+    global username, password, bridgeID, save_path, user_path, error_message, inspection_date
 
-dirpath = ""
-savepath = ""
+username = ""
+password = ""
+bridgeID = []
+save_path = ""
 user_path = ""
+error_message = ""
 inspection_date = ""
