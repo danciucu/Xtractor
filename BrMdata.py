@@ -16,7 +16,7 @@ class get_previous_data():
         # simuate a chrome browser
         driver = selenium.webdriver.Chrome(service = path)
         # access BrM website
-        driver.get('https://brm.kytc.ky.gov/BrM6/Login.aspx?ReturnUrl=%2fBrM6')
+        driver.get('https://brm.kytc.ky.gov/BrM6/Login.aspx?ReturnUrl=%2fBrM6%2fExpiration.aspx')
         # login into the website
         username_driver = driver.find_element(By.ID, "userid")
         username_driver.send_keys(globalvars.username)
@@ -24,6 +24,7 @@ class get_previous_data():
         password_driver.send_keys(globalvars.password)
         login_driver = driver.find_element(By.ID, "btnSignIn")
         login_driver.click()
+
 
         for i in range(len(globalvars.bridgeID)):
             # generate an empty dictionary
