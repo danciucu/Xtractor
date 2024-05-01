@@ -47,15 +47,18 @@ def main(driver, bridge_dict, i):
     waterway_rating_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td[3]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/select')
     bridge_dict['B.AP.02 (Overtopping Likelihood) (Item 71 - Waterway Adequacy)'][1] =  waterway_rating_driver.get_attribute('value')
     # scroll down
-    page_height = driver.execute_script("return document.body.scrollHeight")
-    scroll_driver = driver.execute_script(f'window.scrollTo(0,{page_height * 0.4})')
+    #zoom_out = driver.execute_script("document.body.style.zoom='50%'")
+    #page_height = driver.execute_script("return document.body.scrollHeight")
+    #scroll_driver = driver.execute_script(f'window.scrollTo(0,{page_height * 0.4})')
     # get elements and properties
     while True:
         try:
-            # add element number to the dictionary
-            elem_no_driver = driver.find_element(By.XPATH, f'/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[2]/td/div/fieldset/table/tbody/tr/td/div/div[1]/div[1]/div[8]/div[{elem_tab_count + 1}]/div[2]/table/tbody/tr/td[2]')
+            # xpath element number
+            elem_no_xpath = f'/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[2]/td/div/fieldset/table/tbody/tr/td/div/div[1]/div[1]/div[8]/div[{elem_tab_count + 1}]/div[2]/table/tbody/tr/td[2]'
             # scroll to the element
-            #dynamic_scrolling.scroll(elem_no_driver, driver)
+            dynamic_scrolling.scroll(driver, elem_no_xpath, 200)
+            # add element number to the dictionary
+            elem_no_driver = driver.find_element(By.XPATH, elem_no_xpath)
             # add element total quantity to the dictionary
             elem_totalq_driver = driver.find_element(By.XPATH, f'/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[2]/td/div/fieldset/table/tbody/tr/td/div/div[1]/div[1]/div[8]/div[{elem_tab_count + 1}]/div[2]/table/tbody/tr/td[8]/input')
             # add element CS1 to the dictionary
@@ -147,8 +150,9 @@ def main(driver, bridge_dict, i):
             # update element tab count
             elem_tab_count += 1
         except:
-            # scroll up 
-            scroll_driver = driver.execute_script("window.scrollTo(0,-document.body.scrollHeight)")
+            # scroll up
+            #zoom_out = driver.execute_script("document.body.style.zoom='100%'")
+            #scroll_driver = driver.execute_script("window.scrollTo(0,-document.body.scrollHeight)")
             break
 
     #print(bridge_dict)

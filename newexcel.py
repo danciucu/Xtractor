@@ -10,7 +10,7 @@ class field_notes():
 
     def create(dictionary):
         try:
-            excel_path = 'C:/Users/' + globalvars.user_path + '/AECOM/KYTC NBIS Inspections - 2024-01/400_Technical/200_Templates/MACRO_Inspection Element Library_SNBI.xlsx'
+            excel_path = 'C:/Users/' + globalvars.user_path + '/AECOM\KYTC NBIS Inspections - 2023-2025/400_Technical/200_Templates/MACRO_Inspection Element Library_SNBI.xlsx'
             excel_template = r'%s' % excel_path
             # create a new excel file
             wb = openpyxl.load_workbook(excel_template)
