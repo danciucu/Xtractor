@@ -9,6 +9,9 @@ class field_notes():
         pass
 
     def create(dictionary):
+        # array for keywords that the loop will skip
+        skip_keywords = ['Total Quantity', 'CS1', 'CS2', 'CS3', 'CS4', 'Description', 'Work Items Action', 'Work Items Priority', 'Work Items Responsibility']
+
         try:
             excel_path = 'C:/Users/' + globalvars.user_path + '/AECOM\KYTC NBIS Inspections - 2023-2025/400_Technical/200_Templates/MACRO_Inspection Element Library_SNBI.xlsx'
             excel_template = r'%s' % excel_path
@@ -19,7 +22,16 @@ class field_notes():
             sheet_to_copy = wb['# - Element Temp'] 
             # populate the cells
             for keyword in dictionary:
-                if keyword == 'Elements':
+
+                if keyword == 'Work Items Description':
+                    for k in range(len(dictionary[keyword][1])):
+                        # add working items into the first tab
+                        cell_obj0_wi = sheet.cell(row = dictionary['Work Items Description'][0][k][0], column = dictionary['Work Items Description'][0][k][1], value = dictionary['Work Items Description'][1][k])
+                        cell_obj1_wi = sheet.cell(row = dictionary['Work Items Action'][0][k][0], column = dictionary['Work Items Action'][0][k][1], value = dictionary['Work Items Action'][1][k])
+                        cell_obj2_wi = sheet.cell(row = dictionary['Work Items Priority'][0][k][0], column = dictionary['Work Items Priority'][0][k][1], value = dictionary['Work Items Priority'][1][k])
+                        cell_obj3_wi = sheet.cell(row = dictionary['Work Items Responsibility'][0][k][0], column = dictionary['Work Items Responsibility'][0][k][1], value = dictionary['Work Items Responsibility'][1][k])
+        
+                elif keyword == 'Elements':
                     for j in range(len(dictionary[keyword][1])):
                         # add the notes into the first tab
                         cell_obj0 = sheet.cell(row = dictionary['Elements'][0][j][0], column = dictionary['Elements'][0][j][1], value = dictionary['Elements'][1][j])
@@ -41,7 +53,10 @@ class field_notes():
                         cell_obh4 = new_sheet.cell(row = 4, column = 8, value = dictionary['CS3'][1][j])
                         cell_obh5 = new_sheet.cell(row = 4, column = 9, value = dictionary['CS4'][1][j])
                         cell_obh6 = new_sheet.cell(row = 17, column = 1, value = dictionary['Description'][1][j])
-                    break
+                
+                elif keyword in skip_keywords:
+                    continue
+
                 else:   
                     cell_obj_main = sheet.cell(row = dictionary[keyword][0][0], column = dictionary[keyword][0][1], value = dictionary[keyword][1])
             # save the file

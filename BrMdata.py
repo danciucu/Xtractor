@@ -3,7 +3,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
 import selenium
 
-import globalvars, dictionary_datastructure , get_condition, newExcel
+import globalvars, dictionary_datastructure , condition_page, work_candidates, newExcel
 
 class get_previous_data():
     def __init__(self):
@@ -32,7 +32,9 @@ class get_previous_data():
             # update the dictinary for bridgeID
             bridge_dict['Structure ID'][1] = globalvars.bridgeID[i]
             # update the dictionary based on condition page
-            get_condition.main(driver, bridge_dict, i)
+            condition_page.get_condition(driver, bridge_dict, i)
+            # update the dictionary based on work candidates page
+            work_candidates.get_work_items(driver, bridge_dict, i)
             # create the Excel field note
             newExcel.field_notes.create(bridge_dict)
 

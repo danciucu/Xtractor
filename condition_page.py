@@ -3,7 +3,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 import globalvars, dynamic_scrolling
 
-def main(driver, bridge_dict, i):
+def get_condition(driver, bridge_dict, i):
     # define empty variables
     elem_count = 0
     elem_tab_count = 0
@@ -30,7 +30,7 @@ def main(driver, bridge_dict, i):
     time.sleep(2)
     # get deck rating
     deck_rating_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td[1]/table/tbody/tr[2]/td/table/tbody/tr/td[2]/select')
-    bridge_dict['B.C.01 (Deck) (Item 58)'][1] =  deck_rating_driver.get_attribute('value')
+    bridge_dict['B.C.01 (Deck) (Item 58)'][1] =  int(deck_rating_driver.get_attribute('value'))
     # get superstructure rating
     superstructure_rating_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td[1]/table/tbody/tr[3]/td/table/tbody/tr/td[2]/select')
     bridge_dict['B.C.02 (Superstructure) (Item 59)'][1] =  superstructure_rating_driver.get_attribute('value')
@@ -153,6 +153,7 @@ def main(driver, bridge_dict, i):
             # scroll up
             #zoom_out = driver.execute_script("document.body.style.zoom='100%'")
             #scroll_driver = driver.execute_script("window.scrollTo(0,-document.body.scrollHeight)")
+            driver.execute_script(f'window.scrollTo(0,0)')
             break
 
     #print(bridge_dict)

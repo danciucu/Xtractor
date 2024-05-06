@@ -13,7 +13,6 @@ def check_exists(driver, xpath):
 def scroll(driver, xpath, increment):
     current_height = 0
     page_height = driver.execute_script("return document.body.scrollHeight")
-    print(check_exists(driver, xpath))
     while not check_exists(driver, xpath) and current_height < page_height:
         current_height += increment
         driver.execute_script(f'window.scrollTo(0,{current_height})')

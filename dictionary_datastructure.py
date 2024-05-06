@@ -1,5 +1,11 @@
 def generate_dict():
     brm_dict = {
+        # from BrM Work Candidates
+        'Work Items Description': [[], []],
+        'Work Items Action': [[], []],
+        'Work Items Priority': [[], []],
+        'Work Items Responsibility': [[], []],
+        # from BrM Condition Page
         'Structure ID': [[1, 2], ''],
         'Date': [[4, 2], ''],
         'Route #': [[7, 2], ''],
@@ -11,15 +17,13 @@ def generate_dict():
         'B.C.09 (Channel) (Item 61)': [[49, 2], ''],
         'B.AP.02 (Overtopping Likelihood) (Item 71 - Waterway Adequacy)': [[55, 2], ''],
         'Scour Observed': [[20, 5], ''],
-        # max is 70 for work items
-        #'Work Items': [[[60, 1]], ['']],
         'Elements': [[], []],
         'Total Quantity': [[], []],
         'CS1': [[], []],
         'CS2': [[], []],
         'CS3': [[], []],
         'CS4': [[], []],
-        'Description': [[], []]
+        'Description': [[], []],
     }
 
     return brm_dict
