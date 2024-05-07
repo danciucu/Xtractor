@@ -30,7 +30,7 @@ def get_condition(driver, bridge_dict, i):
     time.sleep(2)
     # get deck rating
     deck_rating_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td[1]/table/tbody/tr[2]/td/table/tbody/tr/td[2]/select')
-    bridge_dict['B.C.01 (Deck) (Item 58)'][1] =  int(deck_rating_driver.get_attribute('value'))
+    bridge_dict['B.C.01 (Deck) (Item 58)'][1] =  deck_rating_driver.get_attribute('value')
     # get superstructure rating
     superstructure_rating_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td[1]/table/tbody/tr[3]/td/table/tbody/tr/td[2]/select')
     bridge_dict['B.C.02 (Superstructure) (Item 59)'][1] =  superstructure_rating_driver.get_attribute('value')
