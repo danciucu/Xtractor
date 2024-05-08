@@ -12,11 +12,11 @@ def get_condition(driver, bridge_dict, i):
     elem_repeated = 0
     # only for the first element 
     if i == 0:
-        # click on KYTC tab
+        # click on INSPECTION tab
         time.sleep(5)
         inspection_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[1]/table/tbody/tr/td/div/div[3]/h3[2]/table/tbody/tr/td[1]')
         inspection_driver.click()
-        # click on WEIGHTS tab
+        # click on CONDITION PAGE button
         time.sleep(5)
         condition_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[1]/table/tbody/tr/td/div/div[3]/div[2]/div/h3[1]')
         condition_driver.click()

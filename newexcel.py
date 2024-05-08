@@ -12,6 +12,8 @@ class field_notes():
 
 
     def create(dictionary):
+        # array for keywords that the loop will skip
+        skip_keywords = ['Total Quantity', 'CS1', 'CS2', 'CS3', 'CS4', 'Description', 'Work Items Action', 'Work Items Priority', 'Work Items Responsibility']
 
         try:
             excel_path = 'C:/Users/' + globalvars.user_path + '/AECOM\KYTC NBIS Inspections - 2023-2025/400_Technical/200_Templates/MACRO_Inspection Element Library_SNBI.xlsx'
@@ -36,7 +38,7 @@ class field_notes():
                     for j in range(len(dictionary[keyword][1])):
                         # add the notes into the first tab
                         cell_obj0 = sheet.cell(row = dictionary['Elements'][0][j][0], column = dictionary['Elements'][0][j][1], value = dictionary['Elements'][1][j])
-                        cell_obj1 = sheet.cell(row = dictionary['Total Quantity'][0][j][0], column = dictionary['Total Quantity'][0][j][1], value = int(dictionary['Total Quantity'][1][j]))
+                        cell_obj1 = sheet.cell(row = dictionary['Total Quantity'][0][j][0], column = dictionary['Total Quantity'][0][j][1], value = dictionary['Total Quantity'][1][j])
                         cell_obj2 = sheet.cell(row = dictionary['CS1'][0][j][0], column = dictionary['CS1'][0][j][1], value = dictionary['CS1'][1][j])
                         cell_obj3 = sheet.cell(row = dictionary['CS2'][0][j][0], column = dictionary['CS2'][0][j][1], value = dictionary['CS2'][1][j])
                         cell_obj4 = sheet.cell(row = dictionary['CS3'][0][j][0], column = dictionary['CS3'][0][j][1], value = dictionary['CS3'][1][j])
@@ -59,7 +61,10 @@ class field_notes():
                         new_sheet.add_data_validation(dv1)
                         dv1.add('D19:D61')
 
-                else:   
+                elif keyword in skip_keywords:
+                    continue
+
+                else:
                     cell_obj_main = sheet.cell(row = dictionary[keyword][0][0], column = dictionary[keyword][0][1], value = dictionary[keyword][1])
             
             # save the file
@@ -83,8 +88,6 @@ class field_notes():
             # save the file again
             wb.save(path)
 
-
-        
         except Exception as e:
             print("An error occurred:", e)
         finally:

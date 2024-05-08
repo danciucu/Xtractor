@@ -2,10 +2,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from pynput.keyboard import Key, Controller
 import time
-import globalvars, dynamic_scrolling
 
 def get_work_items(driver, bridge_dict, i):
+    # set up a variable to control keyboard
+    keyboard = Controller()
     # define empty variables
     work_item_count = 0
     # click on the WORK button
@@ -18,7 +20,10 @@ def get_work_items(driver, bridge_dict, i):
     # get elements and properties
     while True:
         try:
-            # xpath element number
+            # action text of work item
+            work_item_action_text = driver.find_element(By.XPATH, f'/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr[2]/td/div/div/table/tbody/tr[{work_item_count + 2}]/td[3]')
+            action_text = work_item_action_text.text
+            # xpath arrow of work item
             work_item_no_xpath = f'/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr[2]/td/div/div/table/tbody/tr[{work_item_count + 1}]/td[1]'
             # click on the arrow of a work item
             work_item_arrow = driver.find_element(By.XPATH, f'/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr[2]/td/div/div/table/tbody/tr[{work_item_count + 2}]/td[1]')
@@ -41,7 +46,20 @@ def get_work_items(driver, bridge_dict, i):
                           work_item_count = work_item_count)
             # update the work item count
             work_item_count += 1
+
+            # check if action text was empty
+            if action_text == ' ':
+                # press cancel
+                work_item_save = driver.find_element(By.XPATH, '/html/body/form/div[3]/div/table/tbody/tr/td[2]/table/tbody/tr/td[2]/table/tbody/tr/td')
+                work_item_save.click()
+                time.sleep(1)
+
+
         except:
+            # click on CONDITION PAGE button
+            time.sleep(2)
+            condition_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[1]/table/tbody/tr/td/div/div[3]/div[2]/div/h3[1]/a')
+            condition_driver.click()
             break
 
 
