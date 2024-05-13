@@ -1,5 +1,9 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.select import Select
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from pynput.keyboard import Key, Controller
 import time
 import globalvars, dynamic_scrolling
 
@@ -38,7 +42,7 @@ def get_condition(driver, bridge_dict, i):
     substructure_rating_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td[1]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/select')
     bridge_dict['B.C.03 (Substructure) (Item 60)'][1] =  substructure_rating_driver.get_attribute('value')
     # get substructure rating
-    channel_rating_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td[1]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/select')
+    channel_rating_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td[3]/table/tbody/tr[2]/td/table/tbody/tr/td[2]/select')
     bridge_dict['B.C.09 (Channel) (Item 61)'][1] =  channel_rating_driver.get_attribute('value')
     # get culvert rating
     culvert_rating_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td[3]/table/tbody/tr[3]/td/table/tbody/tr/td[2]/select')
