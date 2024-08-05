@@ -15,7 +15,7 @@ def generate_dict():
         'B.C.03 (Substructure) (Item 60)': [[31, 2], ''],
         'B.C.04 (Culverts) (Item 62)': [[34, 2], ''],
         'B.C.09 (Channel) (Item 61)': [[49, 2], ''],
-        'B.AP.02 (Overtopping Likelihood) (Item 71 - Waterway Adequacy)': [[55, 2], ''],
+        #'B.AP.02 (Overtopping Likelihood) (Item 71 - Waterway Adequacy)': [[55, 2], ''],
         'Scour Observed': [[20, 5], ''],
         'Elements': [[], []],
         'Total Quantity': [[], []],

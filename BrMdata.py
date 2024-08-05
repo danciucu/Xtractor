@@ -1,9 +1,11 @@
 from selenium.webdriver.common.by import By
+from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
+from webdriver_manager.chrome import ChromeDriverManager
 import selenium
 
-import globalvars, dictionary_datastructure , condition_page, work_candidates, newExcel
+import globalvars, dictionary_datastructure , condition_page, work_candidates, newExcel, chrome_driver
 
 class get_previous_data():
     def __init__(self):
@@ -11,10 +13,9 @@ class get_previous_data():
         # import global variables
         globalvars.init()
 
-        # allocate a path for the chrome browser simulator
-        path = Service()
+        chrome_driver
         # simuate a chrome browser
-        driver = selenium.webdriver.Chrome(service = path)
+        driver = webdriver.Chrome(service=globalvars.service)
         # access BrM website
         driver.get('https://brm.kytc.ky.gov/BrM6/Login.aspx?ReturnUrl=%2fBrM6%2fExpiration.aspx')
         # login into the website
@@ -24,6 +25,8 @@ class get_previous_data():
         password_driver.send_keys(globalvars.password)
         login_driver = driver.find_element(By.ID, "btnSignIn")
         login_driver.click()
+        # instantiate the class
+        bridge_excel = newExcel.field_notes()
 
 
         for i in range(len(globalvars.bridgeID)):
@@ -36,7 +39,7 @@ class get_previous_data():
             # update the dictionary based on work candidates page
             work_candidates.get_work_items(driver, bridge_dict, i)
             # create the Excel field note
-            newExcel.field_notes.create(bridge_dict)
+            bridge_excel.create(bridge_dict)
 
 
 
