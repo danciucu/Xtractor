@@ -17,6 +17,3 @@ def get_posting(driver, bridge_dict, i):
 
     # scroll back to the left
     scroll_driver = driver.execute_script("window.scrollTo(0,0)")
-
-
-    
