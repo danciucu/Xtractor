@@ -14,16 +14,15 @@ def get_condition(driver, bridge_dict, i):
     child_count = 0
     child_tab_count = 0
     elem_repeated = 0
-    # only for the first element 
-    if i == 0:
-        # click on INSPECTION tab
-        time.sleep(5)
-        inspection_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[1]/table/tbody/tr/td/div/div[3]/h3[2]/table/tbody/tr/td[1]')
-        inspection_driver.click()
-        # click on CONDITION PAGE button
-        time.sleep(5)
-        condition_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[1]/table/tbody/tr/td/div/div[3]/div[2]/div/h3[1]')
-        condition_driver.click()
+
+    # click on INSPECTION tab
+    time.sleep(5)
+    inspection_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[1]/table/tbody/tr/td/div/div[3]/h3[2]/table/tbody/tr/td[1]')
+    inspection_driver.click()
+    # click on CONDITION PAGE button
+    time.sleep(5)
+    condition_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[1]/table/tbody/tr/td/div/div[3]/div[2]/div/h3[1]')
+    condition_driver.click()
     # insert bridges IDs in the bridge box
     time.sleep(2)
     bridgebox_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div/table/tbody/tr/td[1]/table/tbody/tr/td[1]/table/tbody/tr/td[3]/div/input[2]')
@@ -34,22 +33,37 @@ def get_condition(driver, bridge_dict, i):
     time.sleep(2)
     # get deck rating
     deck_rating_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td[1]/table/tbody/tr[2]/td/table/tbody/tr/td[2]/select')
-    bridge_dict['B.C.01 (Deck) (Item 58)'][1] =  deck_rating_driver.get_attribute('value')
+    if deck_rating_driver.get_attribute('value').isnumeric():
+        bridge_dict['B.C.01 (Deck) (Item 58)'][1] = int(deck_rating_driver.get_attribute('value'))
+    else:
+        bridge_dict['B.C.01 (Deck) (Item 58)'][1] = deck_rating_driver.get_attribute('value')
     # get superstructure rating
     superstructure_rating_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td[1]/table/tbody/tr[3]/td/table/tbody/tr/td[2]/select')
-    bridge_dict['B.C.02 (Superstructure) (Item 59)'][1] =  superstructure_rating_driver.get_attribute('value')
+    if superstructure_rating_driver.get_attribute('value').isnumeric():
+        bridge_dict['B.C.02 (Superstructure) (Item 59)'][1] = int(superstructure_rating_driver.get_attribute('value'))
+    else:
+        bridge_dict['B.C.02 (Superstructure) (Item 59)'][1] = superstructure_rating_driver.get_attribute('value')
     # get substructure rating
     substructure_rating_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td[1]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/select')
-    bridge_dict['B.C.03 (Substructure) (Item 60)'][1] =  substructure_rating_driver.get_attribute('value')
+    if substructure_rating_driver.get_attribute('value').isnumeric():
+        bridge_dict['B.C.03 (Substructure) (Item 60)'][1] = int(substructure_rating_driver.get_attribute('value'))
+    else:
+        bridge_dict['B.C.03 (Substructure) (Item 60)'][1] = substructure_rating_driver.get_attribute('value')
     # get substructure rating
     channel_rating_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td[3]/table/tbody/tr[2]/td/table/tbody/tr/td[2]/select')
-    bridge_dict['B.C.09 (Channel) (Item 61)'][1] =  channel_rating_driver.get_attribute('value')
+    if channel_rating_driver.get_attribute('value').isnumeric():
+        bridge_dict['B.C.09 (Channel) (Item 61)'][1] = int(channel_rating_driver.get_attribute('value'))
+    else:
+        bridge_dict['B.C.09 (Channel) (Item 61)'][1] = channel_rating_driver.get_attribute('value')
     # get culvert rating
     culvert_rating_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td[3]/table/tbody/tr[3]/td/table/tbody/tr/td[2]/select')
-    bridge_dict['B.C.04 (Culverts) (Item 62)'][1] =  culvert_rating_driver.get_attribute('value')
+    if culvert_rating_driver.get_attribute('value').isnumeric():
+        bridge_dict['B.C.04 (Culverts) (Item 62)'][1] = int(culvert_rating_driver.get_attribute('value'))
+    else:
+        bridge_dict['B.C.04 (Culverts) (Item 62)'][1] = culvert_rating_driver.get_attribute('value')
     # get waterway rating
-    waterway_rating_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td[3]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/select')
-    bridge_dict['B.AP.02 (Overtopping Likelihood) (Item 71 - Waterway Adequacy)'][1] =  waterway_rating_driver.get_attribute('value')
+    #waterway_rating_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td[3]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/select')
+    #bridge_dict['B.AP.02 (Overtopping Likelihood) (Item 71 - Waterway Adequacy)'][1] =  waterway_rating_driver.get_attribute('value')
     # scroll down
     #zoom_out = driver.execute_script("document.body.style.zoom='50%'")
     #page_height = driver.execute_script("return document.body.scrollHeight")

@@ -56,10 +56,10 @@ def get_work_items(driver, bridge_dict, i):
 
 
         except:
-            # click on CONDITION PAGE button
+            # click on KYTC tab
             time.sleep(2)
-            condition_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[1]/table/tbody/tr/td/div/div[3]/div[2]/div/h3[1]/a')
-            condition_driver.click()
+            kytc_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[1]/table/tbody/tr/td/div/div[3]/h3[3]/table/tbody/tr/td[1]/div')
+            kytc_driver.click()
             break
 
 

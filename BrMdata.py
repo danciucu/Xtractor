@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 import selenium
 
-import globalvars, dictionary_datastructure , condition_page, work_candidates, newExcel, chrome_driver
+import globalvars, dictionary_datastructure , condition_page, work_candidates, newExcel, chrome_driver, inventory_design_page, summary_miscellaneous_page, weights_page
 
 class get_previous_data():
     def __init__(self):
@@ -36,8 +36,14 @@ class get_previous_data():
             bridge_dict['Structure ID'][1] = globalvars.bridgeID[i]
             # update the dictionary based on condition page
             condition_page.get_condition(driver, bridge_dict, i)
+            # update the dictionary based on inventory -> design page
+            inventory_design_page.get_design_info(driver, bridge_dict, i)
             # update the dictionary based on work candidates page
             work_candidates.get_work_items(driver, bridge_dict, i)
+            # update the dictionary based on summary & miscellaneous page
+            summary_miscellaneous_page.get_miscellaneous(driver, bridge_dict, i)
+            # update the dictionary based on weights page
+            weights_page.get_posting(driver, bridge_dict, i)
             # create the Excel field note
             bridge_excel.create(bridge_dict)
 

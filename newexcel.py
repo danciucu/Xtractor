@@ -3,6 +3,8 @@ import openpyxl
 from openpyxl.worksheet.datavalidation import DataValidation
 from pycel import ExcelCompiler
 from openpyxl.utils import quote_sheetname
+from openpyxl.styles import PatternFill
+from openpyxl.formatting.rule import FormulaRule
 import re
 
 import globalvars
@@ -16,6 +18,16 @@ class field_notes():
     def create(self, dictionary):
         # array for keywords that the loop will skip
         skip_keywords = ['Total Quantity', 'CS1', 'CS2', 'CS3', 'CS4', 'Description', 'Work Items Action', 'Work Items Priority', 'Work Items Responsibility']
+        # Define the color fills
+        fill_green = PatternFill(start_color="92D050", end_color="92D050", fill_type="solid")
+        fill_yellow = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+        fill_orange = PatternFill(start_color="FFC000", end_color="FFC000", fill_type="solid")
+        fill_red = PatternFill(start_color="FF0000", end_color="FF0000", fill_type="solid")
+        # Create the rules
+        rule_green = FormulaRule(formula=['$D19="CS1"'], fill=fill_green)
+        rule_yellow = FormulaRule(formula=['$D19="CS2"'], fill=fill_yellow)
+        rule_orange = FormulaRule(formula=['$D19="CS3"'], fill=fill_orange)
+        rule_red = FormulaRule(formula=['$D19="CS4"'], fill=fill_red)
 
         try:
             excel_path = 'C:/Users/' + globalvars.user_path + '/AECOM/KYTC NBIS Inspections - 2023-2025/400_Technical/200_Templates/LA ## D## - County/1_AECOM Bridges/Incomplete/Field Note Spreadsheets/MACRO_Inspection Element Library_SNBI.xlsx'
@@ -64,7 +76,16 @@ class field_notes():
                         cell_obh7 = new_sheet.cell(row = 17, column = 1, value = dictionary['Description'][1][j])
                         # create condition data validation
                         self.create_dataValidation(excel_sheet=new_sheet, input_list="CS1, CS2, CS3, CS4", location='D19:D61')
+                        # Apply the rules to the entire range 'D19:D61'
+                        new_sheet.conditional_formatting.add('D19:D61', rule_green)
+                        new_sheet.conditional_formatting.add('D19:D61', rule_yellow)
+                        new_sheet.conditional_formatting.add('D19:D61', rule_orange)
+                        new_sheet.conditional_formatting.add('D19:D61', rule_red)
 
+                elif keyword == 'Posting Values':
+                    for l in range(len(dictionary[keyword][0])):
+                        # add posting into the first tab
+                        cell_obj0_p = sheet.cell(row = dictionary['Posting Values'][0][l][0], column = dictionary['Posting Values'][0][l][1], value = dictionary['Posting Values'][1][l])
 
                 elif keyword in skip_keywords:
                     continue
@@ -79,7 +100,6 @@ class field_notes():
             wb.save(path)
 
             #print(wb.sheetnames)
-
             # add QTL Data Validation
             qtl_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AG$18:$AG$23', location='B2')
             # add Assistant Data Validation
@@ -132,11 +152,10 @@ class field_notes():
             channel_prev_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='B49')
             channel_current_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='C49')
             # add Channel Data Validation
-            channel_protection_current_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='C52')    
+            channel_protection_current_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='C52')  
             # add Work Items Data Validation
             work_items_action_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AJ$19:$AJ$65', location='E57:E69')
             work_items_comment_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AK$17:$AK$20', location='I57:I69')
-
             # get the saved file
             #excel = ExcelCompiler(filename=path)
             for i in range(len(dictionary['Elements'][1])):
