@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from pynput.keyboard import Key, Controller
+from pynput.keyboard import Controller
 import time
 
 def get_work_items(driver, bridge_dict, i):

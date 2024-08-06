@@ -1,9 +1,5 @@
 from selenium.webdriver.common.by import By
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.keys import Keys
-from webdriver_manager.chrome import ChromeDriverManager
-import selenium
 
 import globalvars, dictionary_datastructure , condition_page, work_candidates, newExcel, chrome_driver, inventory_design_page, summary_miscellaneous_page, weights_page
 

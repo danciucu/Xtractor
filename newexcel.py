@@ -1,11 +1,9 @@
 import os
 import openpyxl
 from openpyxl.worksheet.datavalidation import DataValidation
-from pycel import ExcelCompiler
 from openpyxl.utils import quote_sheetname
 from openpyxl.styles import PatternFill
 from openpyxl.formatting.rule import FormulaRule
-import re
 
 import globalvars
 
