@@ -28,7 +28,8 @@ class field_notes():
         rule_red = FormulaRule(formula=['$D19="CS4"'], fill=fill_red)
 
         try:
-            excel_path = 'C:/Users/' + globalvars.user_path + '/AECOM/KYTC NBIS Inspections - 2023-2025/400_Technical/200_Templates/LA ## D## - County/1_AECOM Bridges/Incomplete/Field Note Spreadsheets/MACRO_Inspection Element Library_SNBI.xlsx'
+            #excel_path = 'C:/Users/' + globalvars.user_path + '/AECOM/KYTC NBIS Inspections - 2023-2025/400_Technical/200_Templates/LA ## D## - County/1_AECOM Bridges/Incomplete/Field Note Spreadsheets/MACRO_Inspection Element Library_SNBI.xlsx'
+            excel_path = 'C:/Users/' + globalvars.user_path + '/AECOM/KYTC NBIS Inspections - Documents/2023-2025/400_Technical/200_Templates/LA ## D## - County/1_AECOM Bridges/Incomplete/Field Note Spreadsheets/MACRO_Inspection Element Library_SNBI.xlsx'
             excel_template = r'%s' % excel_path
             # create a new excel file
             wb = openpyxl.load_workbook(excel_template)
@@ -48,7 +49,7 @@ class field_notes():
                         cell_obj1_wi = sheet.cell(row = dictionary['Work Items Action'][0][k][0], column = dictionary['Work Items Action'][0][k][1], value = dictionary['Work Items Action'][1][k])
                         cell_obj2_wi = sheet.cell(row = dictionary['Work Items Priority'][0][k][0], column = dictionary['Work Items Priority'][0][k][1], value = dictionary['Work Items Priority'][1][k])
                         cell_obj3_wi = sheet.cell(row = dictionary['Work Items Responsibility'][0][k][0], column = dictionary['Work Items Responsibility'][0][k][1], value = dictionary['Work Items Responsibility'][1][k])
-        
+            
                 elif keyword == 'Elements':
                     for j in range(len(dictionary[keyword][1])):
                         # add the notes into the first tab
@@ -81,6 +82,13 @@ class field_notes():
                         new_sheet.conditional_formatting.add('D19:D61', rule_red)
 
                 elif keyword == 'Posting Values':
+                    # update required posting dropdown to "Yes"
+                    if sheet.cell(row = 12, column = 5).value not in (0, None, '') or sheet.cell(row=13, column=5).value not in (0, None, ''):
+                        req_posting = 'Yes'
+                    else:
+                        req_posting = 'No'
+                    sheet.cell(row=9, column=5).value = req_posting
+
                     for l in range(len(dictionary[keyword][0])):
                         # add posting into the first tab
                         cell_obj0_p = sheet.cell(row = dictionary['Posting Values'][0][l][0], column = dictionary['Posting Values'][0][l][1], value = dictionary['Posting Values'][1][l])
@@ -125,7 +133,7 @@ class field_notes():
             # add Scour Observed Data Validation
             scour_prev_dataValidation = self.create_dataValidation(excel_sheet=sheet, input_list="Prev. Rating->, No Scour, Minor Scour, Moderate Scour, Major Scour, N/A", location='E20')
             scour_current_dataValidation = self.create_dataValidation(excel_sheet=sheet, input_list="Prev. Rating->, No Scour, Minor Scour, Moderate Scour, Major Scour, N/A", location='F20')
-            scour_rating_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AV$68:$AV$79', location='E21')
+            #scour_rating_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AV$68:$AV$79', location='E21')
             # add Deck Ratings Data Validation
             deck_prev_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='B25')
             deck_current_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='C25')
@@ -139,18 +147,26 @@ class field_notes():
             culvert_prev_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='B34')
             culvert_current_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='C34')
             # add Rail Data Validation
+            rail_prev_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='B37')
             rail_current_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='C37')
             # add Rail Transition Data Validation
+            rail_transition_prev_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='B40')
             rail_transition_current_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='C40')
             # add Bearing Data Validation
+            bearing_prev_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='B43')
             bearing_current_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='C43')
             # add Joints Data Validation
+            joint_prev_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='B46')
             joint_current_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='C46')
             # add Channel Data Validation
             channel_prev_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='B49')
             channel_current_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='C49')
             # add Channel Data Validation
-            channel_protection_current_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='C52')  
+            channel_protection_prev_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='B52')
+            channel_protection_current_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AN$3:$AN$14', location='C52')
+            # add Scour Validation
+            scour_prev_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AV$68:$AV$79', location='B55')
+            scour_current_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AV$68:$AV$79', location='C55')
             # add Work Items Data Validation
             work_items_action_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AJ$19:$AJ$65', location='E57:E69')
             work_items_comment_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AK$17:$AK$20', location='I57:I69')
@@ -180,6 +196,7 @@ class field_notes():
             # close the workbook
             if 'wb' in locals():
                 wb.close()
+                print(str(dictionary['Structure ID'][1]) + ' field note spreadsheet created')
 
 
 

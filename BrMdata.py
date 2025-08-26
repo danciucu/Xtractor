@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 
-import globalvars, dictionary_datastructure , condition_page, work_candidates, newExcel, chrome_driver, inventory_design_page, summary_miscellaneous_page, weights_page
+import globalvars, dictionary_datastructure , condition_page, work_candidates, newExcel, chrome_driver, inventory_design_page, summary_miscellaneous_page, weights_page, prev_SNBI
 
 class get_previous_data():
     def __init__(self):
@@ -30,6 +30,8 @@ class get_previous_data():
             bridge_dict = dictionary_datastructure.generate_dict()
             # update the dictinary for bridgeID
             bridge_dict['Structure ID'][1] = globalvars.bridgeID[i]
+            # update the dictionary for inspection month
+            bridge_dict['Date'][1] = int(globalvars.inspection_date[5:7])
             # update the dictionary based on condition page
             condition_page.get_condition(driver, bridge_dict, i)
             # update the dictionary based on inventory -> design page
@@ -40,6 +42,8 @@ class get_previous_data():
             summary_miscellaneous_page.get_miscellaneous(driver, bridge_dict, i)
             # update the dictionary based on weights page
             weights_page.get_posting(driver, bridge_dict, i)
+            # open previous SNBI record
+            prev_SNBI.get_prev_SNBI(driver, bridge_dict, i)
             # create the Excel field note
             bridge_excel.create(bridge_dict)
 

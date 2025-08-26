@@ -66,22 +66,22 @@ def get_work_items(driver, bridge_dict, i):
 def add_work_item(driver, bridge_dict, work_item_description, work_item_action, work_item_priority, work_item_responsibility, work_item_count):
     # add work item description to the dictionary
     bridge_dict['Work Items Description'][1].append(work_item_description.text)
-    bridge_dict['Work Items Description'][0].append([57 + work_item_count, 1])
+    bridge_dict['Work Items Description'][0].append([61 + work_item_count, 1])
     # add work item action to the dictionary
     select_action = Select(WebDriverWait(driver, 20).until(EC.element_to_be_clickable(work_item_action)))
     action = select_action.first_selected_option
     #print(action.text)
     bridge_dict['Work Items Action'][1].append(action.text)
-    bridge_dict['Work Items Action'][0].append([57 + work_item_count, 5])
+    bridge_dict['Work Items Action'][0].append([61 + work_item_count, 5])
     # add work item priority to the dictionary
     select_priority = Select(WebDriverWait(driver, 20).until(EC.element_to_be_clickable(work_item_priority)))
     priority = select_priority.first_selected_option
     #print(priority.text)
     bridge_dict['Work Items Priority'][1].append(priority.text)
-    bridge_dict['Work Items Priority'][0].append([57 + work_item_count, 7])
+    bridge_dict['Work Items Priority'][0].append([61 + work_item_count, 7])
     # add work item responsibility to the dictionary
     select_responsibility = Select(WebDriverWait(driver, 20).until(EC.element_to_be_clickable(work_item_responsibility)))
     responsibility = select_responsibility.first_selected_option
     #print(responsibility.text)
     bridge_dict['Work Items Responsibility'][1].append(responsibility.text)
-    bridge_dict['Work Items Responsibility'][0].append([57 + work_item_count, 8])
+    bridge_dict['Work Items Responsibility'][0].append([61 + work_item_count, 8])
