@@ -181,22 +181,22 @@ def add_element(bridge_dict, elem_no_driver, elem_totalq_driver, elem_cs1_driver
     #    bridge_dict['Elements'][0].append([84 + elem_count, 1])
     # add element number to the dictionary
     bridge_dict['Elements'][1].append(elem_no_driver.text)
-    bridge_dict['Elements'][0].append([84 + elem_count, 1])
+    bridge_dict['Elements'][0].append([88 + elem_count, 1])
     # add element total quantity to the dictionary
     bridge_dict['Total Quantity'][1].append(elem_totalq_driver.get_attribute('value'))
-    bridge_dict['Total Quantity'][0].append([84 + elem_count, 2])
+    bridge_dict['Total Quantity'][0].append([88 + elem_count, 2])
     # add element CS1 to the dictionary
     bridge_dict['CS1'][1].append(elem_cs1_driver.text)
-    bridge_dict['CS1'][0].append([84 + elem_count, 3])
+    bridge_dict['CS1'][0].append([88 + elem_count, 3])
     # add element CS2 to the dictionary
     bridge_dict['CS2'][1].append(elem_cs2_driver.get_attribute('value'))
-    bridge_dict['CS2'][0].append([84 + elem_count, 4])
+    bridge_dict['CS2'][0].append([88 + elem_count, 4])
     # add element CS3 to the dictionary
     bridge_dict['CS3'][1].append(elem_cs3_driver.get_attribute('value'))
-    bridge_dict['CS3'][0].append([84 + elem_count, 5])
+    bridge_dict['CS3'][0].append([88 + elem_count, 5])
     # add element CS4 to the dictionary
     bridge_dict['CS4'][1].append(elem_cs4_driver.get_attribute('value'))
-    bridge_dict['CS4'][0].append([84 + elem_count, 6])
+    bridge_dict['CS4'][0].append([88 + elem_count, 6])
     # add element description
     bridge_dict['Description'][1].append(elem_description_text_driver.get_attribute('value'))
-    bridge_dict['Description'][0].append([84 + elem_count, 7])
+    bridge_dict['Description'][0].append([88 + elem_count, 7])

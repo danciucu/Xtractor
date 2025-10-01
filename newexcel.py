@@ -37,10 +37,10 @@ class field_notes():
             # main tab
             sheet = wb['Info, NBI, Work']
             # sheet to copy
-            sheet_to_copy = wb['# - Element Temp'] 
+            sheet_to_copy = wb['# - Element Temp']
             # populate the cells
+            
             for keyword in dictionary:
-
                 if keyword == 'Work Items Description':
                     for k in range(len(dictionary[keyword][1])):
                         # add working items into the first tab
@@ -48,7 +48,7 @@ class field_notes():
                         cell_obj1_wi = sheet.cell(row = dictionary['Work Items Action'][0][k][0], column = dictionary['Work Items Action'][0][k][1], value = dictionary['Work Items Action'][1][k])
                         cell_obj2_wi = sheet.cell(row = dictionary['Work Items Priority'][0][k][0], column = dictionary['Work Items Priority'][0][k][1], value = dictionary['Work Items Priority'][1][k])
                         cell_obj3_wi = sheet.cell(row = dictionary['Work Items Responsibility'][0][k][0], column = dictionary['Work Items Responsibility'][0][k][1], value = dictionary['Work Items Responsibility'][1][k])
-        
+
                 elif keyword == 'Elements':
                     for j in range(len(dictionary[keyword][1])):
                         # add the notes into the first tab
@@ -81,16 +81,18 @@ class field_notes():
                         new_sheet.conditional_formatting.add('D19:D61', rule_red)
 
                 elif keyword == 'Posting Values':
-                    for l in range(len(dictionary[keyword][0])):
-                        # add posting into the first tab
-                        cell_obj0_p = sheet.cell(row = dictionary['Posting Values'][0][l][0], column = dictionary['Posting Values'][0][l][1], value = dictionary['Posting Values'][1][l])
+                    try:
+                        for l in range(len(dictionary[keyword][0])):
+                            # add posting into the first tab
+                            cell_obj0_p = sheet.cell(row = dictionary['Posting Values'][0][l][0], column = dictionary['Posting Values'][0][l][1], value = dictionary['Posting Values'][1][l])
+                    except Exception as e:
+                        print("An error occurred:", e)
 
                 elif keyword in skip_keywords:
                     continue
 
                 else:
                     cell_obj_main = sheet.cell(row = dictionary[keyword][0][0], column = dictionary[keyword][0][1], value = dictionary[keyword][1])
-            
             #
             
             # save the file
@@ -170,7 +172,6 @@ class field_notes():
                 #dv2 = DataValidation(type='list', formula1=f'"{defects}"')
                 #ws.add_data_validation(dv2)
                 #dv2.add('C19:C61')
-
             # save the file again
             wb.save(path)
 
