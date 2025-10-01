@@ -69,22 +69,18 @@ def add_work_item(driver, bridge_dict, work_item_description, work_item_action, 
     # add work item description to the dictionary
     bridge_dict['Work Items Description'][1].append(work_item_description.text)
     bridge_dict['Work Items Description'][0].append([61 + work_item_count, 1])
-    print(work_item_description.text)
     # add work item action to the dictionary
     select_action = Select(WebDriverWait(driver, 100).until(EC.visibility_of(work_item_action)))
     action = select_action.first_selected_option.text
     bridge_dict['Work Items Action'][1].append(action)
     bridge_dict['Work Items Action'][0].append([61 + work_item_count, 5])
-    print(action)
     # add work item priority to the dictionary
     select_priority = Select(WebDriverWait(driver, 100).until(EC.visibility_of(work_item_priority)))
     priority = select_priority.first_selected_option.text
     bridge_dict['Work Items Priority'][1].append(priority)
     bridge_dict['Work Items Priority'][0].append([61 + work_item_count, 7])
-    print(priority)
     # add work item responsibility to the dictionary
     select_responsibility = Select(WebDriverWait(driver, 100).until(EC.visibility_of(work_item_responsibility)))
     responsibility = select_responsibility.first_selected_option.text
     bridge_dict['Work Items Responsibility'][1].append(responsibility)
     bridge_dict['Work Items Responsibility'][0].append([61 + work_item_count, 8])
-    print(responsibility)
