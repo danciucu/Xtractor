@@ -163,7 +163,7 @@ class field_notes():
             scour_current_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AV$68:$AV$79', location='C55')
             # add Work Items Data Validation
             work_items_action_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AJ$19:$AJ$65', location='E57:E69')
-            work_items_comment_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AK$17:$AK$20', location='I57:I69')
+            work_items_comment_dataValidation = self.create_dataValidation(excel_sheet=sheet, reference_sheet=referece_sheet, cell_range_to_copy='$AK$17:$AK$21', location='I57:I69')
             # get the saved file
             #excel = ExcelCompiler(filename=path)
             for i in range(len(dictionary['Elements'][1])):
