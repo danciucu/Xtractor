@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 import time
 
-
 def get_design_info(driver, bridge_dict, i):
     # click on INVENTORY button
     time.sleep(2)

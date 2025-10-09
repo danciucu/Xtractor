@@ -94,7 +94,6 @@ class field_notes():
 
                 else:
                     cell_obj_main = sheet.cell(row = dictionary[keyword][0][0], column = dictionary[keyword][0][1], value = dictionary[keyword][1])
-            #
             
             # save the file
             path = os.path.join(globalvars.save_path, dictionary['Structure ID'][1] + ' Field Notes '+ globalvars.inspection_date[0:4] + globalvars.inspection_date[5:7] +'DD.xlsx')
