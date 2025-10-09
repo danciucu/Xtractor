@@ -25,7 +25,6 @@ class get_previous_data():
         bridge_excel = newExcel.field_notes()
 
 
-
         for i in range(len(globalvars.bridgeID)):
             # generate an empty dictionary
             bridge_dict = dictionary_datastructure.generate_dict()

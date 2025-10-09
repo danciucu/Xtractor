@@ -183,7 +183,6 @@ class field_notes():
                 wb.close()
 
 
-
     def create_dataValidation(self, excel_sheet, location, input_list=None, cell_range_to_copy=None, reference_sheet=None):
         # If the user inputs a list, set the formula accordingly
         if input_list:
