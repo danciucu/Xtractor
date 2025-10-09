@@ -3,6 +3,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import os
 import globalvars
 
+
 try:
     # Install the ChromeDriver using webdriver-manager
     chrome_driver_path = ChromeDriverManager().install()

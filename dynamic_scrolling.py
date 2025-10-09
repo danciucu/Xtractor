@@ -9,6 +9,7 @@ def check_exists(driver, xpath):
     except:
         return False
 
+
 def scroll(driver, xpath, increment):
     current_height = 0
     page_height = driver.execute_script("return document.body.scrollHeight")

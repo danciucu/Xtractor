@@ -57,7 +57,6 @@ class Xtractor(ttkthemes.ThemedTk):
         self.start_button.grid(row = 11, column = 1) 
 
 
-
     # define function that imports the Excel file
     def excel_import(self):
         # variable that handles the Excel path

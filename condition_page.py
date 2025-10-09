@@ -3,6 +3,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 import globalvars, dynamic_scrolling
 
+
 def get_condition(driver, bridge_dict, i):
     # define empty variables
     elem_count = 0
