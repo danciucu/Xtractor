@@ -13,6 +13,7 @@ class field_notes():
         pass
 
 
+
     def create(self, dictionary):
         # array for keywords that the loop will skip
         skip_keywords = ['Total Quantity', 'CS1', 'CS2', 'CS3', 'CS4', 'Description', 'Work Items Action', 'Work Items Priority', 'Work Items Responsibility']
