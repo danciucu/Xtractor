@@ -5,7 +5,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from pynput.keyboard import Controller
 import time
 
-
 def get_work_items(driver, bridge_dict, i):
     # set up a variable to control keyboard
     keyboard = Controller()
