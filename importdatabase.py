@@ -1,7 +1,6 @@
 import globalvars
 import pandas as pd
 
-
 class bridgeID():
     def __init__(self, arg):
 

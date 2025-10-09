@@ -31,5 +31,4 @@ def generate_dict():
         'Description': [[], []],
     }
 
-
     return brm_dict

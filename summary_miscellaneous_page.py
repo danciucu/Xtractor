@@ -2,7 +2,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 import time
 
-
 def get_miscellaneous(driver, bridge_dict, i):
     # click on SUMMARY & MISCELLANEOUS button
     time.sleep(2)

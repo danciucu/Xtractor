@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 import time
 
-
 def get_posting(driver, bridge_dict, i):
     # click on WEIGHTS button
     time.sleep(2)
