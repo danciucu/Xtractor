@@ -48,6 +48,5 @@ class get_previous_data():
             bridge_excel.create(bridge_dict)
 
 
-
         # close driver
         driver.close()

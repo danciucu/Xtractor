@@ -1,0 +1,4 @@
+# Folders
+__pycache__/
+# Test Files
+test_workcandidates.py

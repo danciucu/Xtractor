@@ -18,6 +18,7 @@ def get_work_items(driver, bridge_dict, i):
     work_candidates_driver = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[1]/table/tbody/tr/td/div/div[3]/div[2]/div/div[5]/div[1]')
     work_candidates_driver.click()
     # get elements and properties
+    time.sleep(1)
     while True:
         try:
             # action text of work item
@@ -28,14 +29,15 @@ def get_work_items(driver, bridge_dict, i):
             # click on the arrow of a work item
             work_item_arrow = driver.find_element(By.XPATH, f'/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr[2]/td/div/div/table/tbody/tr[{work_item_count + 2}]/td[1]')
             work_item_arrow.click()
+            time.sleep(1)
             # find description of the work item
             work_item_description = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[2]/td/table/tbody/tr/td/div[1]/table/tbody/tr[2]/td/div/fieldset/table/tbody/tr/td[2]/table/tbody/tr/td/table/tbody/tr/td[2]/textarea')
             # find action of the work item
-            work_item_action = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[2]/td/table/tbody/tr/td/div[1]/table/tbody/tr[2]/td/div/fieldset/table/tbody/tr/td[1]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/select')
+            work_item_action = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[2]/td/table/tbody/tr/td/div[1]/table/tbody/tr[2]/td/div/fieldset/table/tbody/tr/td[1]/table/tbody/tr[3]/td/table/tbody/tr/td[2]/select')
             # find priority of the work item
-            work_item_priority = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[2]/td/table/tbody/tr/td/div[1]/table/tbody/tr[2]/td/div/fieldset/table/tbody/tr/td[1]/table/tbody/tr[6]/td/table/tbody/tr/td[2]/select')
+            work_item_priority = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[2]/td/table/tbody/tr/td/div[1]/table/tbody/tr[2]/td/div/fieldset/table/tbody/tr/td[1]/table/tbody/tr[5]/td/table/tbody/tr/td[2]/select')
             # find responsibility of the work item
-            work_item_responsibility = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[2]/td/table/tbody/tr/td/div[1]/table/tbody/tr[2]/td/div/fieldset/table/tbody/tr/td[1]/table/tbody/tr[12]/td/table/tbody/tr/td[2]/select')
+            work_item_responsibility = driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td/div[1]/div[1]/div/div[1]/table/tbody/tr/td/table/tbody/tr[1]/td/div/fieldset/table/tbody/tr[2]/td/table/tbody/tr/td/div[1]/table/tbody/tr[2]/td/div/fieldset/table/tbody/tr/td[1]/table/tbody/tr[11]/td/table/tbody/tr/td[2]/select')
             # update element dictionary
             add_work_item(driver = driver,
                           bridge_dict = bridge_dict,
@@ -68,20 +70,17 @@ def add_work_item(driver, bridge_dict, work_item_description, work_item_action, 
     bridge_dict['Work Items Description'][1].append(work_item_description.text)
     bridge_dict['Work Items Description'][0].append([61 + work_item_count, 1])
     # add work item action to the dictionary
-    select_action = Select(WebDriverWait(driver, 20).until(EC.element_to_be_clickable(work_item_action)))
-    action = select_action.first_selected_option
-    #print(action.text)
-    bridge_dict['Work Items Action'][1].append(action.text)
+    select_action = Select(WebDriverWait(driver, 100).until(EC.visibility_of(work_item_action)))
+    action = select_action.first_selected_option.text
+    bridge_dict['Work Items Action'][1].append(action)
     bridge_dict['Work Items Action'][0].append([61 + work_item_count, 5])
     # add work item priority to the dictionary
-    select_priority = Select(WebDriverWait(driver, 20).until(EC.element_to_be_clickable(work_item_priority)))
-    priority = select_priority.first_selected_option
-    #print(priority.text)
-    bridge_dict['Work Items Priority'][1].append(priority.text)
+    select_priority = Select(WebDriverWait(driver, 100).until(EC.visibility_of(work_item_priority)))
+    priority = select_priority.first_selected_option.text
+    bridge_dict['Work Items Priority'][1].append(priority)
     bridge_dict['Work Items Priority'][0].append([61 + work_item_count, 7])
     # add work item responsibility to the dictionary
-    select_responsibility = Select(WebDriverWait(driver, 20).until(EC.element_to_be_clickable(work_item_responsibility)))
-    responsibility = select_responsibility.first_selected_option
-    #print(responsibility.text)
-    bridge_dict['Work Items Responsibility'][1].append(responsibility.text)
+    select_responsibility = Select(WebDriverWait(driver, 100).until(EC.visibility_of(work_item_responsibility)))
+    responsibility = select_responsibility.first_selected_option.text
+    bridge_dict['Work Items Responsibility'][1].append(responsibility)
     bridge_dict['Work Items Responsibility'][0].append([61 + work_item_count, 8])
